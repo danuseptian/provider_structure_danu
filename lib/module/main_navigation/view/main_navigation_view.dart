@@ -38,16 +38,16 @@ class MainNavigationView extends StatelessWidget {
       ProfileView(),
     ];
 
-    return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        currentIndex: context.read<MainNavigationController>().selectedIndex,
-        onTap: context.read<MainNavigationController>().onItemTapped,
-        items: bottomNavItem,
-      ),
-      body: Consumer<MainNavigationController>(builder: (_, controller, __) {
-        return bottomTabView.elementAt(controller.selectedIndex);
-      }),
-    );
+    return Consumer<MainNavigationController>(builder: (_, controller, __) {
+      return Scaffold(
+          bottomNavigationBar: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            currentIndex:
+                context.read<MainNavigationController>().selectedIndex,
+            onTap: context.read<MainNavigationController>().onItemTapped,
+            items: bottomNavItem,
+          ),
+          body: bottomTabView.elementAt(controller.selectedIndex));
+    });
   }
 }
